@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogPost from '../../components/BlogPost.astro';
+
+const posts = await Astro.glob('./*.{md,mdx}');
+const sortedPosts = posts
+  .filter(post => !post.url?.includes('index'))
+  .sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+---
+
+<Layout title="Blog Posts">
+  <section class="mb-16">
+    <h1 class="text-4xl font-bold mb-4">Latest Articles</h1>
+    <p class="text-xl text-gray-600">
+      Browse through all my blog posts
+    </p>
+  </section>
+
+  <section>
+    {sortedPosts.map((post) => (
+      <BlogPost
+        title={post.frontmatter.title}
+        description={post.frontmatter.description}
+        pubDate={new Date(post.frontmatter.pubDate)}
+        url={post.url}
+      />
+    ))}
+  </section>
+</Layout>

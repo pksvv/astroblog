@@ -1,0 +1,28 @@
+{
+  "name": "astro-medium-blog",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^2.2.0",
+    "@astrojs/rss": "^4.0.5",
+    "@astrojs/sitemap": "^3.1.1",
+    "@astrojs/tailwind": "^5.1.0",
+    "@heroicons/react": "^2.1.1",
+    "@tailwindcss/typography": "^0.5.10",
+    "astro": "^4.5.0",
+    "date-fns": "^3.3.1",
+    "tailwindcss": "^3.4.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
+}

@@ -1,0 +1,86 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: string;
+}
+
+const { 
+  title, 
+  description = "A Medium-style blog built with Astro",
+  image = "/social-image.jpg",
+  type = "website"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-white text-gray-900">
+    <header class="border-b border-gray-200">
+      <nav class="max-w-4xl mx-auto px-4 py-6">
+        <div class="flex justify-between items-center">
+          <a href="/" class="text-2xl font-bold text-accent-600 hover:text-accent-700 transition-colors duration-200">Blog</a>
+          <div class="space-x-6">
+            <a href="/" class="hover:text-accent-600 transition-colors duration-200">Home</a>
+            <a href="/blog" class="hover:text-accent-600 transition-colors duration-200">Articles</a>
+            <a href="/resume" class="hover:text-accent-600 transition-colors duration-200">Resume</a>
+            <a href="/about" class="hover:text-accent-600 transition-colors duration-200">About</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="max-w-4xl mx-auto px-4 py-12">
+      <slot />
+    </main>
+    <footer class="border-t border-gray-200 mt-12">
+      <div class="max-w-4xl mx-auto px-4 py-6 text-center text-gray-600">
+        <p>&copy; {new Date().getFullYear()} Your Blog. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  body {
+    font-family: 'Merriweather', serif;
+  }
+</style>

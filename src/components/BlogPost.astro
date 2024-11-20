@@ -1,0 +1,25 @@
+---
+import { format } from 'date-fns';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  url: string;
+}
+
+const { title, description, pubDate, url } = Astro.props;
+---
+
+<article class="mb-12">
+  <a href={url}>
+    <h2 class="text-3xl font-bold mb-2 hover:text-accent-600 transition-colors duration-200">{title}</h2>
+  </a>
+  <time class="text-accent-600 text-sm" datetime={pubDate.toISOString()}>
+    {format(pubDate, 'MMMM d, yyyy')}
+  </time>
+  <p class="mt-3 text-gray-700 leading-relaxed">{description}</p>
+  <a href={url} class="inline-block mt-4 text-accent-600 hover:text-accent-700 transition-colors duration-200">
+    Read more →
+  </a>
+</article>

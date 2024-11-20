@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogPost from '../components/BlogPost.astro';
+
+const posts = await Astro.glob('./blog/*.{md,mdx}');
+const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+---
+
+<Layout title="Welcome to My Blog">
+  <section class="text-center mb-16">
+    <h1 class="text-5xl font-bold mb-4">Welcome to My Blog</h1>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+      Thoughts, stories and ideas about technology, life, and everything in between.
+    </p>
+  </section>
+
+  <section>
+    {sortedPosts.map((post) => (
+      <BlogPost
+        title={post.frontmatter.title}
+        description={post.frontmatter.description}
+        pubDate={new Date(post.frontmatter.pubDate)}
+        url={post.url}
+      />
+    ))}
+  </section>
+</Layout>

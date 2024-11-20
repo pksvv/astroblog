@@ -1,0 +1,85 @@
+---
+import Layout from './Layout.astro';
+import { format } from 'date-fns';
+
+const { frontmatter } = Astro.props;
+const formattedDate = format(new Date(frontmatter.pubDate), 'MMMM d, yyyy');
+
+// Schema.org structured data
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": frontmatter.title,
+  "description": frontmatter.description,
+  "datePublished": frontmatter.pubDate,
+  "dateModified": frontmatter.updatedDate || frontmatter.pubDate,
+  "image": frontmatter.image || "/social-image.jpg",
+  "author": {
+    "@type": "Person",
+    "name": "Your Name"
+  }
+};
+---
+
+<Layout 
+  title={frontmatter.title}
+  description={frontmatter.description}
+  image={frontmatter.image}
+  type="article"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  
+  <article class="prose lg:prose-xl mx-auto">
+    <header class="mb-8">
+      <h1 class="text-4xl font-bold mb-2">{frontmatter.title}</h1>
+      <time class="text-accent-600 text-sm" datetime={frontmatter.pubDate}>
+        {formattedDate}
+      </time>
+      {frontmatter.tags && (
+        <div class="mt-4 flex gap-2">
+          {frontmatter.tags.map((tag: string) => (
+            <a href={`/tags/${tag}`} class="text-sm bg-accent-50 px-3 py-1 rounded-full text-accent-700 hover:bg-accent-100 transition-colors duration-200">
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
+    <div class="mt-8">
+      <slot />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .prose {
+    max-width: 65ch;
+    margin: 0 auto;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    color: #1a202c;
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+  
+  .prose p {
+    margin-bottom: 1.5em;
+    line-height: 1.75;
+  }
+  
+  .prose ul,
+  .prose ol {
+    margin-bottom: 1.5em;
+    padding-left: 1.5em;
+  }
+  
+  .prose li {
+    margin-bottom: 0.5em;
+  }
+</style>

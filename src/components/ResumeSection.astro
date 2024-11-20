@@ -1,0 +1,119 @@
+---
+interface Experience {
+  title: string;
+  company: string;
+  period: string;
+  description: string[];
+}
+
+interface Education {
+  degree: string;
+  school: string;
+  period: string;
+}
+
+interface Skill {
+  category: string;
+  items: string[];
+}
+
+const experiences: Experience[] = [
+  {
+    title: "Senior Software Engineer",
+    company: "Tech Company",
+    period: "2020 - Present",
+    description: [
+      "Led development of microservices architecture",
+      "Mentored junior developers",
+      "Improved system performance by 40%"
+    ]
+  },
+  {
+    title: "Full Stack Developer",
+    company: "StartUp Inc",
+    period: "2018 - 2020",
+    description: [
+      "Built responsive web applications",
+      "Implemented CI/CD pipelines",
+      "Reduced loading time by 60%"
+    ]
+  }
+];
+
+const education: Education[] = [
+  {
+    degree: "Master's in Computer Science",
+    school: "Tech University",
+    period: "2016 - 2018"
+  },
+  {
+    degree: "Bachelor's in Software Engineering",
+    school: "Engineering College",
+    period: "2012 - 2016"
+  }
+];
+
+const skills: Skill[] = [
+  {
+    category: "Languages",
+    items: ["JavaScript", "TypeScript", "Python", "Java"]
+  },
+  {
+    category: "Frameworks",
+    items: ["React", "Node.js", "Next.js", "Express"]
+  },
+  {
+    category: "Tools",
+    items: ["Git", "Docker", "AWS", "MongoDB"]
+  }
+];
+---
+
+<section class="max-w-4xl mx-auto py-16">
+  <div class="mb-12">
+    <h2 class="text-3xl font-bold mb-6 text-accent-600">Experience</h2>
+    <div class="space-y-8">
+      {experiences.map(exp => (
+        <div class="border-l-4 border-accent-200 pl-4 hover:border-accent-500 transition-colors duration-200">
+          <h3 class="text-xl font-bold">{exp.title}</h3>
+          <p class="text-accent-600 mb-2">{exp.company} | {exp.period}</p>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            {exp.description.map(item => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="mb-12">
+    <h2 class="text-3xl font-bold mb-6 text-accent-600">Education</h2>
+    <div class="space-y-6">
+      {education.map(edu => (
+        <div class="border-l-4 border-accent-200 pl-4 hover:border-accent-500 transition-colors duration-200">
+          <h3 class="text-xl font-bold">{edu.degree}</h3>
+          <p class="text-accent-600">{edu.school} | {edu.period}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div>
+    <h2 class="text-3xl font-bold mb-6 text-accent-600">Skills</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {skills.map(skill => (
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-200">
+          <h3 class="text-xl font-bold mb-3">{skill.category}</h3>
+          <div class="flex flex-wrap gap-2">
+            {skill.items.map(item => (
+              <span class="bg-accent-50 text-accent-700 px-3 py-1 rounded-full text-sm">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

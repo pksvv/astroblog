@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ResumeSection from '../components/ResumeSection.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+---
+
+<Layout title="My Resume">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4">John Doe</h1>
+      <p class="text-xl text-gray-600 mb-6">Senior Software Engineer</p>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+        Passionate software engineer with 5+ years of experience in building scalable web applications
+        and leading development teams. Focused on creating efficient, maintainable, and user-friendly solutions.
+      </p>
+      <SocialLinks />
+    </div>
+
+    <ResumeSection />
+
+    <div class="text-center mt-12">
+      <a
+        href="/resume.pdf"
+        class="inline-flex items-center px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors duration-200"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        Download Resume
+      </a>
+    </div>
+  </div>
+</Layout>
